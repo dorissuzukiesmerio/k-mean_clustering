@@ -32,7 +32,10 @@ machine = KMeans(n_clusters = 4)
 machine.fit(data)
 
 # Step 3 - Predict the data:
-machine.predict(data)
+results = machine.predict(data)
+
+#Create centroid as object for visualization:
+centroids = machine.cluster_centers_
 
 # Interpretation:
 # 400 dots; 400 observations ; 400 group numbers assigned to the result
@@ -43,4 +46,6 @@ machine.predict(data)
 # Visualization of results: 
 # Scatterplot (x, y)
 pyplot.scatter(data[:,0], data[:,1], c = results) # row, column (all rows, first column)
-pyplot.savefig("scatterplot2.png") # no need for this if using Jupyter Notebook
+pyplot.scatter(centroids[:,0], centroids[:,1], c='red', marker= "*", s=200)
+pyplot.savefig("scatterplot_colors.png") # no need for this if using Jupyter Notebook
+
