@@ -21,3 +21,26 @@ print(data)
 pyplot.scatter(data[:,0], data[:,1]) # row, column (all rows, first column)
 pyplot.savefig("scatterplot.png") # no need for this if using Jupyter Notebook
 
+
+###  IMPLEMENTING ALGORITHM ###
+# Step 1 - Construct the Machine:
+machine = KMeans(n_clusters = 4) 
+# KMeans() is from the imported package
+# specify the number of clusters
+
+# Step 2 - Fit the data:
+machine.fit(data)
+
+# Step 3 - Predict the data:
+machine.predict(data)
+
+# Interpretation:
+# 400 dots; 400 observations ; 400 group numbers assigned to the result
+# first observation: assigned to group 1
+# second : group 3 
+# ..... and so on.....
+
+# Visualization of results: 
+# Scatterplot (x, y)
+pyplot.scatter(data[:,0], data[:,1], c = results) # row, column (all rows, first column)
+pyplot.savefig("scatterplot2.png") # no need for this if using Jupyter Notebook
