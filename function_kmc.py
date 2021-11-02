@@ -4,6 +4,8 @@ import pandas
 from sklearn.cluster import KMeans # python -m pip install scikit-learn
 import matplotlib.pyplot as pyplot
 
+from sklearn.metrics import 
+
 data = pandas.read_csv("dataset.csv")
 
 print(data)
@@ -23,6 +25,8 @@ def run_kmeans(n, data):
 	centroids = machine.cluster_centers_ # internal use
 	ssd = machine.inertia_ #sum of square deviations
 	print(ssd)
+	if n>1:
+		print(silhouette_score(data, machine.labels_, metric = 'euclidean'))
 	pyplot.scatter(data[:,0], data[:,1], c = results) # row, column (all rows, first column)
 	pyplot.scatter(centroids[:,0], centroids[:,1], c='red', marker= "*", s=200)
 	pyplot.savefig("scatterplot_colors_"+ str(n) + ".png") # no need for this if using Jupyter Notebook
@@ -56,6 +60,16 @@ print(result_diff)
 # The closest center of gravity 
 # Two conditions that need to be satisfied
 
-
+# INTERPRETATION:
 # ssd : sum of distance given the number of clusterings - > so you cannot compare the numbers 
-# Decreasing from 4144 to 1900 to 1100 to 600 to 500 
+# Decreasing from 4144 to 1900 to 1100 to 600 to 500 (highest decrease)
+
+
+# Silhouette Score:
+# Find the highest number
+# A = mean intra-cluster distance
+# B = mean nearest-cluster distance
+
+# S = B - A / max(A, B)
+
+
