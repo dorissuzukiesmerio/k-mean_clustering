@@ -18,19 +18,21 @@ pyplot.scatter(data[:,0], data[:,1]) # row, column (all rows, first column)
 pyplot.savefig("scatterplot.png") # no need for this if using Jupyter Notebook
 
 
-def run_kmeans(n, data):
+def run_kmeans(n, data): 	
 	machine = KMeans(n_clusters = n) 
 	machine.fit(data)
 	results = machine.predict(data)
 	centroids = machine.cluster_centers_ # internal use
 	ssd = machine.inertia_ #sum of square deviations
-	print(ssd)
+	# print(ssd)
+	silhouette = 0
 	if n>1:
 		print(silhouette_score(data, machine.labels_, metric = 'euclidean'))
 	pyplot.scatter(data[:,0], data[:,1], c = results) # row, column (all rows, first column)
 	pyplot.scatter(centroids[:,0], centroids[:,1], c='red', marker= "*", s=200)
 	pyplot.savefig("scatterplot_colors_"+ str(n) + ".png") # no need for this if using Jupyter Notebook
 	pyplot(close)
+	return ssd, silhouette_score
 
 run_means(4)
 
