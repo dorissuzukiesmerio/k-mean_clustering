@@ -3,13 +3,14 @@
 import pandas
 from sklearn.cluster import KMeans # python -m pip install scikit-learn
 import matplotlib.pyplot as pyplot
+import numpy
 
-from sklearn.metrics import 
+from sklearn.metrics import silhouette_score
 
 data = pandas.read_csv("dataset.csv")
 
 print(data)
-data = data.values # two values in one array, array of arrays ; loads to sklearn better; though looses some functionalities such as matrix operation
+data = data.values # Transformation: two values in one array, array of arrays ; loads to sklearn better; though looses some functionalities such as matrix operation
 print(data)
 
 
@@ -27,14 +28,14 @@ def run_kmeans(n, data):
 	# print(ssd)
 	silhouette = 0
 	if n>1:
-		print(silhouette_score(data, machine.labels_, metric = 'euclidean'))
+		silhouette = silhouette_score(data, machine.labels_, metric = 'euclidean')
 	pyplot.scatter(data[:,0], data[:,1], c = results) # row, column (all rows, first column)
 	pyplot.scatter(centroids[:,0], centroids[:,1], c='red', marker= "*", s=200)
 	pyplot.savefig("scatterplot_colors_"+ str(n) + ".png") # no need for this if using Jupyter Notebook
-	pyplot(close)
-	return ssd, silhouette_score
+	pyplot.close()
+	return ssd, silhouette
 
-run_means(4)
+# run_means(4, data)
 
 # #Now:
 # for number in range(4):
@@ -47,9 +48,9 @@ run_means(4)
 result = [run_kmeans(i+1, data) for i in range(7)][1:]
 print(result)
 
-pyplot.plot(range(7), result)
+pyplot.plot(range(1,8), result)
 pyplot.savefig("ssd.png")
-pyplot.close()
+pyplot.close() # Interpretaion: see almost linear flat curve after n=4
 
 # result_diff = []
 # for i,x in enumerate(results)
@@ -58,6 +59,7 @@ pyplot.close()
 
 result_diff = [result[i-1] - x for i,x in enumerate(results)] [1:] # [1:] is the way to drop the first element
 print(result_diff)
+
 # Remembering:
 # The closest center of gravity 
 # Two conditions that need to be satisfied
@@ -67,11 +69,24 @@ print(result_diff)
 # Decreasing from 4144 to 1900 to 1100 to 600 to 500 (highest decrease)
 
 
-# Silhouette Score:
+# Silhouette Score: the highest peak in the graph
 # Find the highest number
 # A = mean intra-cluster distance
 # B = mean nearest-cluster distance
 
 # S = B - A / max(A, B)
 
+# ssd_result_diff = [ ssd_result[i-1] - x for i,x  in enumerate(ssd_result)][1:]
+
+pyplot.plot(range(2,8), silhouette_result)
+pyplot.savefig("silhouette.png")
+pyplot.close()
+
+print("\nssd: \n", ssd_result)
+print("\nssd differences: \n", ssd_result_diff)
+
+
+print("\nsilhouette scores: \n", silhouette_result)
+print("\nmax silhouette scores: \n", max(silhouette_result))
+print("\nnumber of cluster with max silhouette scores: \n", silhouette_result.index(max(silhouette_result))+2)
 
