@@ -9,7 +9,7 @@ data = pandas.read_csv("dataset.csv")
 print(data)
 
 # Example 1: x1 = Density of tree , x2 =  number of shops
-# Example 2: x1 = Number of tickets if individual, x2 = occupation of individual
+# Example 2: x1 = Number of tickets of individual, x2 = occupation of individual
 
 # Transformation: Sklearn doesn't support DataFrame format very well -> so there is a need to transform to 
 data = data.values # two values in one array, array of arrays ; loads to sklearn better; though looses some functionalities such as matrix operation
@@ -48,4 +48,4 @@ centroids = machine.cluster_centers_
 pyplot.scatter(data[:,0], data[:,1], c = results) # row, column (all rows, first column)
 pyplot.scatter(centroids[:,0], centroids[:,1], c='red', marker= "*", s=200)
 pyplot.savefig("scatterplot_colors.png") # no need for this if using Jupyter Notebook
-
+pyplot.close()
