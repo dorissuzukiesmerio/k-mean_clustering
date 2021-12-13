@@ -49,6 +49,8 @@ result = [run_kmeans(i+1, data) for i in range(7)]
 print("\nresult:\n", result)
 
 ssd_result = [ i[0] for i in result] 
+print("\nssd_result: \n", ssd_result)
+
 silhouette_result = [ i[1] for i in result][1:]
 
 pyplot.plot(range(1,8), result)
@@ -60,8 +62,8 @@ pyplot.close() # Interpretaion: see almost linear flat curve after n=4
 # 	diff = result[i-1] - x
 # 	result_diff.append(diff)
 
-sdd_result_diff = [sdd_result[i-1] - x for i,x in enumerate(sdd_results)] [1:] # [1:] is the way to drop the first element
-print(sdd_result_diff)
+ssd_result_diff = [ssd_result[i-1] - x for i,x in enumerate(ssd_result)][1:] # [1:] is the way to drop the first element
+print(ssd_result_diff)
 
 # Remembering:
 # The closest center of gravity 

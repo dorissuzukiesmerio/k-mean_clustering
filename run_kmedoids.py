@@ -56,8 +56,12 @@ def run_KMedoids(n, data):
 	return ssd, silhouette
 
 
+#KMeans results:
 result = [run_kmeans(i+1, data) for i in range(7)][1:]
 print(result)
+
+ssd_result = [ i[0] for i in result] 
+silhouette_result = [ i[1] for i in result][1:]
 
 pyplot.plot(range(1,8), result)
 pyplot.savefig("ssd.png")
@@ -80,8 +84,14 @@ print("\nmax silhouette scores: \n", max(silhouette_result))
 print("\nnumber of cluster with max silhouette scores: \n", silhouette_result.index(max(silhouette_result))+2)
 
 
+#KMedoids
+
 result = [run_kmedoids(i+1, data) for i in range(7)][1:]
 print(result)
+
+
+ssd_result = [ i[0] for i in result] 
+silhouette_result = [ i[1] for i in result][1:]
 
 pyplot.plot(range(1,8), result)
 pyplot.savefig("ssd.png")
