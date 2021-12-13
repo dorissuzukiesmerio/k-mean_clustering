@@ -89,9 +89,8 @@ print("\nnumber of cluster with max silhouette scores: \n", silhouette_result.in
 result = [run_kmedoids(i+1, data) for i in range(7)][1:]
 print(result)
 
-
-ssd_result = [ i[0] for i in result] 
-silhouette_result = [ i[1] for i in result][1:]
+ssd_result = [ i[0] for i in result]  # Getting first item of the array
+silhouette_result = [ i[1] for i in result][1:] # Getting second item of the array
 
 pyplot.plot(range(1,8), result)
 pyplot.savefig("ssd.png")
